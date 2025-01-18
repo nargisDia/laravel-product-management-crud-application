@@ -7,10 +7,10 @@
         <h1 class="card-header text-center p-3">Laravel 11 CRUD Products Management App</h1>
     </div>
 
-    <div class="mb-6 text-center">
+    <div class="col-md-8 offset-md-2 p-3 text-center">
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-success rounded-lg bg-light" role="alert">
-                <span class="font-medium">Success alert!</span> {{ session('success') }}
+            <div class="alert alert-success" role="alert">
+                <span class="fs-5">Success alert!</span> {{ session('success') }}
             </div>
         @endif
     
@@ -58,11 +58,11 @@
 
                     @if($product->image)
                     <td class="p-4">
-                        <img src="{{ asset('storage/products/' . basename($product->image)) }}" class="w-16 md:w-32 max-w-full max-h-full" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/' . basename($product->image)) }}" class="c-img-thumbnail img-thumbnail mw-30" alt="{{ $product->name }}">
                     </td>
                     @else
                     <td class="p-4">
-                        <img src="{{ asset('storage/products/default.svg') }}" class="w-16 md:w-32 max-w-full max-h-full" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/default.svg') }}" class="c-img-thumbnail img-thumbnail" alt="{{ $product->name }}">
                     </td>
                     @endif
 
@@ -71,7 +71,7 @@
                     <td class="p-4">{{ $product->price }}</td>
                     <td class="p-4">{{ $product->stock }}</td>
                     <td class="p-4">
-                        <a href="#" class="btn btn-primary btn-sm">View</a>
+                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary btn-sm">View</a>
                         <a href="#" class="btn btn-warning btn-sm">Edit</a>
                         <a href="#" class="btn btn-danger btn-sm">Delete</a>
                     </td>
