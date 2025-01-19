@@ -1,5 +1,37 @@
 import "./bootstrap";
 
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+
+        const later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+
+        const callNow = immediate && !timeout;
+
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+
+        if (callNow) func.apply(context, args);
+    };
+}
+
+function getCurrentActionUrl(path) {
+    const currentUrl = window.location.href;
+    let actionUrl;
+    if (currentUrl.charAt(currentUrl.length - 1) !== "/") {
+        actionUrl = `${currentUrl}/${path}`;
+    } else {
+        actionUrl = currentUrl + path;
+    }
+
+    return actionUrl;
+}
+
 function updateProductImagePreview() {
     const productUpdateFormImage = document.getElementById(
         "product-edit-view-image"
@@ -37,14 +69,7 @@ function deleteProduct() {
 
     const handleDeleteProduct = function (e, productId) {
         e.preventDefault();
-
-        const currentUrl = window.location.href;
-        let actionUrl;
-        if (currentUrl.charAt(currentUrl.length - 1) !== "/") {
-            actionUrl = `${currentUrl}/${productId}`;
-        } else {
-            actionUrl = currentUrl + productId;
-        }
+        let actionUrl = getCurrentActionUrl(productId);
         const actionForm = e.target;
         actionForm.action = actionUrl;
         actionForm.submit();
@@ -68,7 +93,37 @@ function deleteProduct() {
     });
 }
 
+function handleSearchProduct() {
+    const searchInput = document.getElementById("c-search-product-input");
+    const tBodyProducts = document.querySelector(".c-products-tbody");
+
+    if (!searchInput || !tBodyProducts) {
+        return;
+    }
+
+    const fetchSearchedData = debounce(async function (queryValue) {
+        const actionUrl = getCurrentActionUrl(`search`);
+        console.log(actionUrl);
+
+        const res = await axios.get(actionUrl, {
+            params: { query: queryValue },
+        });
+
+        if (!res.data) {
+            return;
+        }
+
+        tBodyProducts.innerHTML = null;
+        tBodyProducts.insertAdjacentHTML("afterbegin", res.data);
+    }, 500);
+
+    searchInput.addEventListener("input", function (e) {
+        fetchSearchedData(e.target.value);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     updateProductImagePreview();
     deleteProduct();
+    handleSearchProduct();
 });

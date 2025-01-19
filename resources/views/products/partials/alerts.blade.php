@@ -1,4 +1,4 @@
-<div class="col-md-8 offset-md-2 mb-6" >
+<div class="col-md-8 offset-md-2 my-3" >
     @if (session('success'))
         <div class="alert alert-success" role="alert">
             <span class="font-medium">Success alert!</span> {{ session('success') }}

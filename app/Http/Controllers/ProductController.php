@@ -124,4 +124,14 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('error', 'Product not found.');
     }
+
+    function search(Request $request) {
+        $search = $request->input('query');
+        
+        $products = Product::where('name', 'like', "%$search%")
+            ->orWhere('description', 'like', "%$search%")
+            ->get();
+
+        return view('products.partials.product_rows', compact('products'));
+    }
 }
