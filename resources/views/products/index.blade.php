@@ -71,8 +71,8 @@
                     <td class="p-4">{{ $product->price }}</td>
                     <td class="p-4">{{ $product->stock }}</td>
                     <td class="p-4">
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary btn-sm">View</a>
-                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('products.show', $product->product_id) }}" class="btn btn-primary btn-sm">View</a>
+                        <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <a href="#" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
