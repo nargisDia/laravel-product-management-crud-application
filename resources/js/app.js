@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const productUpdateFormImageInput =
         document.getElementById("product-image");
 
+    if (!productUpdateFormImage || !productUpdateFormImageInput) {
+        return;
+    }
+
     productUpdateFormImageInput.addEventListener("change", function () {
         const file = this.files[0];
 
