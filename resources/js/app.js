@@ -21,12 +21,12 @@ function debounce(func, wait, immediate) {
 }
 
 function getCurrentActionUrl(path) {
-    const currentUrl = window.location.href;
+    const baseUrl = window.location.origin + window.location.pathname;
     let actionUrl;
-    if (currentUrl.charAt(currentUrl.length - 1) !== "/") {
-        actionUrl = `${currentUrl}/${path}`;
+    if (baseUrl.charAt(baseUrl.length - 1) !== "/") {
+        actionUrl = `${baseUrl}/${path}`;
     } else {
-        actionUrl = currentUrl + path;
+        actionUrl = baseUrl + path;
     }
 
     return actionUrl;

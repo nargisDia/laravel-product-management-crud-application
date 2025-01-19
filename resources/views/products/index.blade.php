@@ -81,6 +81,7 @@
                 @include('products.partials.product_rows')
             </tbody>
         </table>
+        <div> {{ $products->links('pagination::bootstrap-5') }} </div>
     </div>
 </div>
 
