@@ -10,8 +10,17 @@ class ProductController extends Controller
 {
     function index(Request $request)
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $sortBy = $request->input('sortBy', 'id');
+        $sortOrder = $request->input('sortOrder', 'desc');
+
+        $allowedSorts = ['id', 'name', 'description', 'price', 'stock'];
+
+        if (!in_array($sortBy, $allowedSorts)) {
+            $sortBy = 'id';
+        }
+
+        $products = Product::orderBy($sortBy, $sortOrder)->paginate(10);
+        return view('products.index', compact('products', 'sortBy', 'sortOrder'));
     }
 
     function show(Request $request, $slug)

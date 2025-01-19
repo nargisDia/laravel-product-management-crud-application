@@ -23,12 +23,57 @@
         <table class="table table-hover" id="c-products-table">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">
+                    <a href="{{ route('products.index', ['sortBy' => 'id', 'sortOrder' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                        #
+                        @if($sortBy == 'id' && $sortOrder == 'asc')
+                            <i class="bi bi-arrow-up"></i>
+                        @else
+                            <i class="bi bi-arrow-down"></i>
+                        @endif
+                    </a>
+                </th>
                 <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Stock</th>
+                <th scope="col">
+                    <a href="{{ route('products.index', ['sortBy' => 'name', 'sortOrder' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                        Name
+                        @if($sortBy == 'name' && $sortOrder == 'asc')
+                            <i class="bi bi-arrow-up"></i>
+                        @else
+                            <i class="bi bi-arrow-down"></i>
+                        @endif
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="{{ route('products.index', ['sortBy' => 'description', 'sortOrder' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                        Description
+                        @if($sortBy == 'description' && $sortOrder == 'asc')
+                            <i class="bi bi-arrow-up"></i>
+                        @else
+                            <i class="bi bi-arrow-down"></i>
+                        @endif
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="{{ route('products.index', ['sortBy' => 'price', 'sortOrder' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                        Price
+                        @if($sortBy == 'price' && $sortOrder == 'asc')
+                            <i class="bi bi-arrow-up"></i>
+                        @else
+                            <i class="bi bi-arrow-down"></i>
+                        @endif
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="{{ route('products.index', ['sortBy' => 'stock', 'sortOrder' => $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                        Stock
+                        @if($sortBy == 'stock' && $sortOrder == 'asc')
+                            <i class="bi bi-arrow-up"></i>
+                        @else
+                            <i class="bi bi-arrow-down"></i>
+                        @endif
+                    </a>
+                </th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
