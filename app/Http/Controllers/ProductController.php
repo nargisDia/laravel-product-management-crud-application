@@ -112,4 +112,16 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('error', 'Product not found.');
     }
+
+
+    function destroy(Request $request, $id) {
+        $product = Product::whereId($id)->first();
+
+        if ($product) {
+            $product->delete();
+            return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        }
+
+        return redirect()->route('products.index')->with('error', 'Product not found.');
+    }
 }

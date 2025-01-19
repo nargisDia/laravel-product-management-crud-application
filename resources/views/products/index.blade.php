@@ -39,7 +39,7 @@
     </div>
 
     <div class="card-body">
-        <table class="table table-hover">
+        <table class="table table-hover" id="c-products-table">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -73,7 +73,7 @@
                     <td class="p-4">
                         <a href="{{ route('products.show', $product->product_id) }}" class="btn btn-primary btn-sm">View</a>
                         <a href="{{ route('products.edit', $product->product_id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#product-delete-modal" role="button">Delete</button>
+                        <button class="btn btn-danger btn-sm" id="c-product-delete-btn" data-bs-toggle="modal" data-bs-target="#product-delete-modal" role="button" data-product-id="{{$product->id}}">Delete</button>
                     </td>
                 </tr>
                 @endforeach
